@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import useProductStore from "../store/productStore";
+import{ products} from "../constant/data";
+
 export const ProductsContext = createContext({
   items: [],
   getQauntity: () => {},
@@ -19,12 +21,12 @@ const ProductContextProvider = ({ children }) => {
 
   //filtering products by gender
   const filterProducts = filterValue && filterValue !== "all"
-    ? product.filter(
+    ? products.filter(
         (product) =>
           product.category === filterValue ||
           product.price === filterValue
       )
-    : product;
+    : products;
 
   // get qauntity
   const getQauntity = (id) => {

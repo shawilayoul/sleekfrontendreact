@@ -6,78 +6,81 @@ export const homeSlideData = [
     id: 1,
     title: "Casual Comfort: The Classic T-Shirt",
     description:
-      "Experience ultimate comfort and effortless style with our premium cotton t-shirts, perfect for any occasion.",
-    imgageLeft: images.tshirt1,
-    imageRight: images.tshirt1,
+      "Experience ultimate comfort and effortless style with our premium cotton t-shirts, perfect for any occasion. Shop now and enjoy free shipping on your first order!",
+    imgageLeft: images.mencloth3,
+    imageRight: images.mencloth3,
+    cta: "Shop Now", // Add a call-to-action
   },
   {
     id: 2,
-    title: "Bold & Vibrant: The Red Statement Tee",
+    title: "Elegant Timekeeping: The Modern Watch",
     description:
-      "Make a statement with our eye-catching red t-shirt—bold, confident, and designed for those who stand out.",
-    imgageLeft: images.tshirtRouge,
-    imageRight: images.tshirtRouge,
+      "Stay on time in style with our sleek and modern watches—perfect for both casual and formal occasions. Limited stock available—grab yours before it's gone!",
+    imgageLeft: images.watch1,
+    imageRight: images.watch2,
+    cta: "Get Yours", // Add urgency
   },
   {
     id: 3,
-    title: "Timeless Elegance: The Black Tee",
+    title: "Chic & Comfortable: Women's Shoes",
     description:
-      "A wardrobe essential—our black t-shirt pairs seamlessly with any outfit, offering style and sophistication.",
-    imgageLeft: images.tshirtNoir,
-    imageRight: images.tshirtNoir,
+      "Step out in style with our trendy and comfortable women's shoes—designed for elegance and everyday wear. Upgrade your footwear collection today!",
+    imgageLeft: images.woemenShoes1,
+    imageRight: images.woemenShoes1,
+    cta: "Buy Now", // Encourage action
   },
   {
     id: 4,
-    title: "Sharp & Stylish: The Modern Suit",
+    title: "Functional Fashion: The Stylish Bag",
     description:
-      "Elevate your look with our finely tailored suit—perfect for formal occasions and business elegance.",
-    imgageLeft: images.suit2,
-    imageRight: images.suit2,
+      "Carry your essentials in style with our versatile and chic bags—perfect for work, travel, or casual outings. Discover the perfect bag for your lifestyle.",
+    imgageLeft: images.bag1,
+    imageRight: images.bag2,
+    cta: "Discover More", // Invite exploration
   },
   {
     id: 5,
-    title: "The Power Suit: Confidence in Every Stitch",
+    title: "Sharp & Stylish: Kids's Formal Wear",
     description:
-      "Command attention with our premium suit—crafted for those who lead with style and authority.",
-    imgageLeft: images.suit4,
-    imageRight: images.suit4,
+      "Elevate your wardrobe with our premium men's formal wear—crafted for sophistication and confidence. Shop now and enjoy exclusive discounts!",
+    imgageLeft: images.kid1,
+    imageRight: images.kid1,
+    cta: "Shop Exclusive", // Highlight exclusivity
   },
 ];
-
 
 /****shop slide data******/
 
 export const shopSlideDAta = [
   {
     id: 1,
-    title: "Discover Timeless Style with Our Classic Tees",
+    title: "Timeless Elegance: The Modern Watch",
     description:
-      "Elevate your everyday look with our versatile t-shirt collection. Perfectly designed to offer comfort without compromising on style, these tees are your new wardrobe staple.",
-    image: images.tshirt1,
+      "Stay on time in style with our sleek and modern watches—perfect for both casual and formal occasions. Elevate your look with this timeless accessory.",
+    image: images.watch2,
   },
   {
     id: 2,
-    title: "Bold and Modern: The Noir Collection",
+    title: "Chic and Stylish: The Trendy Hat",
     description:
-      "Make a statement with our sleek Noir t-shirt. Crafted for the bold and the daring, this piece combines minimalism with attitude, making it perfect for any occasion.",
-    image: images.tshirtNoir,
+      "Top off your outfit with our trendy hat collection. Designed for both fashion and function, these hats add a touch of sophistication to any look.",
+    image: images.hat,
   },
   {
     id: 3,
-    title: "Vibrant and Trendy: The Rouge Tee",
+    title: "Sharp and Versatile: Men's Casual Wear",
     description:
-      "Add a pop of color to your wardrobe with our Rouge t-shirt. Designed for those who want to stand out, this tee brings vibrant energy and unbeatable style to your day-to-day outfits.",
-    image: images.tshirtRouge,
+      "Upgrade your casual wardrobe with our modern men's clothing. Perfect for everyday wear, these pieces combine comfort and style effortlessly.",
+    image: images.mencloth3,
   },
   {
     id: 4,
-    title: "Effortless Elegance: The Sleek Tee",
+    title: "Elegant and Comfortable: Women's Shoes",
     description:
-      "Simplicity meets sophistication in our Sleek t-shirt. With its clean lines and high-quality fabric, this tee offers both style and comfort for a look that’s effortlessly chic.",
-    image: images.tshirt2,
+      "Step out in style with our chic women's shoes. Designed for elegance and comfort, these shoes are perfect for any occasion.",
+    image: images.woemenShoes1,
   },
 ];
-
 /*** blog post data ***/
 
 export const blogPost = [
@@ -103,7 +106,8 @@ export const blogPost = [
     id: 3,
     image: images.bolg3,
     date: "20/10/2024",
-    title: "The Art of Accessorizing: Elevating Your Outfits with Simple Pieces",
+    title:
+      "The Art of Accessorizing: Elevating Your Outfits with Simple Pieces",
     author: "John",
     description:
       "Accessories can make or break an outfit. In this post, we dive into the art of accessorizing, showcasing how the right accessories can elevate even the simplest of outfits. Whether it’s a statement necklace or a stylish scarf, discover how to add the perfect finishing touch to your wardrobe.",
@@ -120,113 +124,104 @@ export const blogPost = [
 ];
 
 
-
-/*** home product data ***/
-export const PopularProductData = [
-  {
-    id: 1,
-    image: images.kid1,
-    name: " kids",
-    price:100,
-    sold:854
-
+export const products = [
+  {_id:1,
+    productName: "Classic Cotton T-Shirt",
+    image: images.mencloth3,
+    description: "Soft and comfortable cotton t-shirt for men.",
+    price: 19.99,
+    quantity: 50,
+    category: "Clothing",
+    subcategory: "men",
   },
   {
-    id: 2,
-    image: images.girl8,
-    name: "product women",
-    price: 10,
-    sold:694
+    _id:2,
+    productName: "Elegant Women's Dress",
+    image: images.mencloth2,
+    description: "Stylish and elegant dress for women.",
+    price: 49.99,
+    quantity: 30,
+    category: "Clothing",
+    subcategory: "women",
   },
   {
-    id: 3,
-    image: images.boy10,
-    name: "product men",
-    price:"20",
-    sold:874
+    _id:3,
+    productName: "Kids' Sneakers",
+    image: images.blazer2,
+    description: "Comfortable and durable sneakers for kids.",
+    price: 29.99,
+    quantity: 40,
+    category: "Footwear",
+    subcategory: "kids",
   },
   {
-    id: 4,
-    image: images.boy11,
-    name: "product men",
-    price: "10",
-    sold:356
+    _id:4,
+    productName: "Men's Leather Jacket",
+    image: images.mencloth4,
+    description: "Premium leather jacket for men.",
+    price: 99.99,
+    quantity: 20,
+    category: "Clothing",
+    subcategory: "men",
   },
   {
-    id: 5,
-    image: images.girl7,
-    name: "product women",
-    price: "70",
-    sold:745
+    _id:5,
+    productName: "Women's Handbag",
+    image: images.bag1,
+    description: "Chic and functional handbag for women.",
+    price: 59.99,
+    quantity: 25,
+    category: "Accessories",
+    subcategory: "women",
   },
   {
-    id: 6,
-    image: images.kid2,
-    name: "product kid",
-    price: "50",
-    sold:142
+    _id:6,
+    productName: "Kids' Backpack",
+    image: images.bag2,
+    description: "Colorful and spacious backpack for kids.",
+    price: 39.99,
+    quantity: 35,
+    category: "Accessories",
+    subcategory: "kids",
   },
   {
-    id: 7,
+    _id:7,
+    productName: "Men's Running Shoes",
+    image: images.air2,
+    description: "Lightweight and breathable running shoes for men.",
+    price: 79.99,
+    quantity: 15,
+    category: "Footwear",
+    subcategory: "men",
+  },
+  {
+    _id:8,
+    productName: "Women's Sunglasses",
+    image: images.woemenShoes1,
+    description: "Trendy sunglasses for women.",
+    price: 29.99,
+    quantity: 50,
+    category: "Accessories",
+    subcategory: "women",
+  },
+  {
+    _id:9,
+    productName: "Kids' T-Shirt",
     image: images.kid3,
-    name: "product kids",
-    price: "80",
-    sold:361
+    description: "Fun and colorful t-shirt for kids.",
+    price: 14.99,
+    quantity: 60,
+    category: "Clothing",
+    subcategory: "kids",
   },
   {
-    id: 8,
-    image: images.boy15,
-    name: "product men",
-    price: "100",
-    sold:412
-  },/*
-  {
-    id: 9,
-    image: images.girl3,
-    name: "product women",
-    price: "100",
-    sold:412
+    _id:10,
+    productName: "Men's Watch",
+    image: images.watch1,
+    description: "Sleek and modern watch for men.",
+    price: 89.99,
+    quantity: 10,
+    category: "Accessories",
+    subcategory: "men",
   },
-  {
-    id: 10,
-    image: images.kid5,
-    name: "product kids",
-    price: "70",
-    sold:854
-  },
-  {
-    id: 11,
-    image: images.kid2,
-    name: "product kids",
-    price: "40",
-    sold:1854
-  },
-  {
-    id: 12,
-    image: images.girl9,
-    name: "product women",
-    price: "80",
-    sold:317
-  },
-  {
-    id: 13,
-    image: images.boy11,
-    name: "product men",
-    price: "70",
-    sold:7856
-  },
-  {
-    id: 14,
-    image: images.boy1,
-    name: "product men",
-    price: "70",
-    sold:7453
-  },
-  {
-    id: 15,
-    image: images.girl6,
-    name: "product women",
-    price: "100",
-    sold:732
-  },*/
 ];

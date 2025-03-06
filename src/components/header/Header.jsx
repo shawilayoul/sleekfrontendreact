@@ -1,18 +1,30 @@
+
+
+
+
 import { FaShoppingCart } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { CardElement } from "@stripe/react-stripe-js";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUser, FaSearch } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../../context/ProductContext";
-import {  useStripe, useElements } from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 import axios from "axios";
 
 const Header = () => {
+  const [customerName, setCustomerName] = useState("");
+  const [email, setEmail] = useState("");
+  const [streetAddress, setStreetAddress] = useState("");
+  const [city, setCity] = useState("");
+  const [stateProvince, setStateProvince] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [postalCode, setPostalCode] = useState("");
   const [cartModel, setCartModel] = useState(false);
   const [checkOutModel, setCheckoutModel] = useState(false);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false); // Track loading state
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,6 +36,7 @@ const Header = () => {
     deleteFromCart,
     addOneToCart,
     removerOneFromCart,
+    clearCart,
   } = useContext(ProductsContext);
 
   // get the total qauntity
@@ -35,21 +48,29 @@ const Header = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleSubmit = async (e) => {
+  const handleStripePayment = async (e) => {
     e.preventDefault();
-
+    setLoading(true); // Set loading state
+  
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
       billing_details: {
-        name: "Jenny Rosen",
-        email: "shawil@gmail.com",
-        phone: "07 8237 11 77",
+        name: customerName, 
+        email: email, 
+        phone: phoneNumber, 
+        address: {
+          line1: streetAddress,
+          city: city, 
+          state: stateProvince, 
+          postal_code: postalCode, 
+        },
       },
     });
-
+  
     if (error) {
       console.log(error);
+      setLoading(false); // Reset loading state if there's an error
     } else {
       console.log(paymentMethod);
       // Send the paymentMethod.id to your backend for processing
@@ -60,9 +81,16 @@ const Header = () => {
           paymentMethodId: paymentMethod.id,
         }
       );
-      if (response.data.success) {
-        console.log("payement success");
+      if (response.data.success) {  
+        clearCart();
+  
+        setCheckoutModel(false); 
         navigate("/checkout-success");
+  
+        setCartModel(false);
+      } else {
+        console.error("Payment failed, try again.");
+        setLoading(false); 
       }
     }
   };
@@ -93,8 +121,8 @@ const Header = () => {
         <div className="flex justify-between  h-16">
           {/* Logo Section */}
           <div className="hidden flex-shrink-0 md:flex items-center">
-            <a href="#" className="md:text-2xl font-bold text-xl">
-              SleekStyle
+            <a href="/" className="md:text-2xl font-bold text-xl">
+              SleekStyles
             </a>
           </div>
           {/* Mobile Menu Button */}
@@ -131,14 +159,6 @@ const Header = () => {
           </ul>
           {/* search btn cart profile */}
           <div className="right flex items-center gap-10 ms:gap-2">
-            <div className="search hidden md:flex items-center gap-2 ">
-              <FaSearch className="search-icon" />
-              <input
-                type="text"
-                placeholder="search.........."
-                className="rounded p-1"
-              />
-            </div>
             <div className="user cursor-pointer">
               <FaUser className="icons" onClick={() => navigate("/signup")} />
             </div>
@@ -235,54 +255,145 @@ const Header = () => {
                 {/* Checkout Form */}
                 {checkOutModel && (
                   <form
-                    onSubmit={handleSubmit}
-                    className="ChackoutForm absolute top-full right-0 bg-white shadow-lg rounded-lg mt-4 w-80 md:w-96 p-4 space-y-4"
+                    onSubmit={handleStripePayment}
+                    className="ChackoutForm absolute top-full right-0 bg-white shadow-lg rounded-lg mt-3 w-80 md:w-96 p-4 "
                   >
-                    <div className="space-y-2">
+                    {/* Customer Name Field */}
+                    <div className="">
+                      <p className="font-bold">Customer Name</p>
+                      <input
+                        type="text"
+                        placeholder="Enter your name"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={customerName}
+                        onChange={(e) => setCustomerName(e.target.value)}
+                        required
+                      />
+                    </div>
+                    {/* Email Field */}
+                    <div className="">
                       <p className="font-bold">E-mail</p>
                       <input
                         type="email"
                         placeholder="Enter your Email"
-                        className="w-full p-2 border border-gray-300 rounded-md"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
                       />
                     </div>
 
-                    <div className="space-y-2">
+                    {/* Card Information */}
+                    <div className="">
                       <p className="font-bold">Card Information</p>
-                      <CardElement className="border p-2 rounded-md border-gray-300" />
+                      <CardElement
+                        className="border p-2 rounded-md border-gray-300"
+                        required
+                      />
                     </div>
 
-                    <div className="space-y-2">
-                      <p className="font-bold">Country or Region</p>
-                      <select className="w-full p-2 border border-gray-300 text-gray-700 rounded-md">
-                        <option value="United States">United States</option>
-                        <option value="United States">France</option>
-                        <option value="United States">Spain</option>
-                      </select>
+                    {/* Billing Address - Street */}
+                    <div className="">
+                      <p className="font-bold">Street Address</p>
+                      <input
+                        type="text"
+                        placeholder="Enter your street address"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={streetAddress}
+                        onChange={(e) => setStreetAddress(e.target.value)}
+                        required
+                      />
                     </div>
 
-                    <div className="space-y-2">
+                    {/* Billing Address - City */}
+                    <div className="">
+                      <p className="font-bold">City</p>
+                      <input
+                        type="text"
+                        placeholder="Enter your city"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={city}
+                        onChange={(e) => setCity(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    {/* Billing Address - State/Province */}
+                    <div className="">
+                      <p className="font-bold">State/Province</p>
+                      <input
+                        type="text"
+                        placeholder="Enter your state or province"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={stateProvince}
+                        onChange={(e) => setStateProvince(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    {/* Phone Number */}
+                    <div className="">
+                      <p className="font-bold">Phone Number</p>
+                      <input
+                        type="tel"
+                        placeholder="Enter your phone number"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={phoneNumber}
+                        onChange={(e) => setPhoneNumber(e.target.value)}
+                        required
+                      />
+                    </div>
+
+                    {/* Postal Code */}
+                    <div className="">
                       <p className="font-bold">Postal Code</p>
                       <input
                         type="text"
                         placeholder="Postal code"
-                        className="w-full p-2 border border-gray-300  text-gray-700 rounded-md"
+                        className="w-full p-2 border border-gray-300 text-gray-700 rounded-md"
+                        value={postalCode}
+                        onChange={(e) => setPostalCode(e.target.value)}
+                        required
                       />
                     </div>
 
+                    {/* Terms and Conditions */}
+                    <div className=" flex items-center">
+                      <input
+                        type="checkbox"
+                        id="terms"
+                        className="mr-2"
+                        required
+                      />
+                      <label htmlFor="terms" className="text-sm text-gray-600">
+                        I agree to the{" "}
+                        <a href="/terms" className="text-blue-500">
+                          Terms & Conditions
+                        </a>{" "}
+                        and{" "}
+                        <a href="/privacy-policy" className="text-blue-500">
+                          Privacy Policy
+                        </a>
+                        .
+                      </label>
+                    </div>
+
+                    {/* Submit Buttons */}
                     <div className="flex justify-between space-x-2 mt-4">
                       <button
-                        className="btCancell w-1/2 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        type="button"
+                        className="w-1/2 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
                         onClick={() => setCheckoutModel(!checkOutModel)}
                       >
                         Cancel
                       </button>
+
                       <button
                         type="submit"
                         className="w-1/2 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-                        onClick={()=>navigate('/checkout-success')}
+                        disabled={loading}
                       >
-                        Pay Now
+                        {loading ? "Processing..." : "Pay Now"}
                       </button>
                     </div>
                   </form>
@@ -295,10 +406,14 @@ const Header = () => {
 
       {/* Mobile Navigation Menu */}
       {isOpen && (
-        <ul className="md:hidden bg-gray-400 z-20">
+        <ul className="md:hidden bg-gray-400">
           {menu.map(({ id, name, link }) => (
             <li key={id} className="block px-4 py-2 text-sm hover:bg-blue-700">
-              <Link to={link} className="link" onClick={()=>setIsOpen(!isOpen)}>
+              <Link
+                to={link}
+                className="link"
+                onClick={() => setIsOpen(!isOpen)}
+              >
                 {name}
               </Link>
             </li>
@@ -309,3 +424,5 @@ const Header = () => {
   );
 };
 export default Header;
+
+

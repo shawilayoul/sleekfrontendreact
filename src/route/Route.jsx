@@ -37,8 +37,6 @@ import Reports from "../adminDashbord/pages/reports/Reports";
 import AddReport from "../adminDashbord/pages/reports/AddReport";
 import EditReport from "../adminDashbord/pages/reports/EditReport";
 import Categories from "../adminDashbord/pages/category/Categories";
-import AddCategory from "../adminDashbord/pages/category/AddCategory";
-import EditCategory from "../adminDashbord/pages/category/EditCategory";
 import ProductDetails from "../pages/ProductDetails";
 
 const router = createBrowserRouter([
@@ -195,14 +193,7 @@ const router = createBrowserRouter([
         path: "categories",
         element: <Categories />,
       },
-      {
-        path: "addCategory",
-        element: <AddCategory />,
-      },
-      {
-        path: "editCategory",
-        element: <EditCategory />,
-      },
+   
       {
         path: "settings",
         element: <Settings />,

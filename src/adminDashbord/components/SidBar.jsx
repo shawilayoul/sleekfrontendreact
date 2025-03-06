@@ -48,11 +48,25 @@ const SidBar = () => {
             <li className="p-1 hover:bg-blue-300 ">
               <Link to="addProduct">Add Product</Link>
             </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="products/editProduct/:productId">Edit Product</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="productDetail">Product Details</Link>
+          </ul>
+        )}
+      </div>
+      <div className="Category">
+        <div
+          className="flex items-center p-2 justify-between hover:bg-blue-300 "
+          onClick={() => setToggleCategory(!toggleCategory)}
+        >
+          <div className="flex items-center justify-between  gap-3">
+            <PiCertificateLight /> <h3>Category</h3>
+          </div>
+          <div className="arrow ml-10">
+            {toggleCategory ? <FaAngleDown /> : <FaAngleLeft />}
+          </div>
+        </div>
+        {toggleCategory && (
+          <ul className="flex flex-col ml-6 ">
+            <li className="p-1  hover:bg-blue-300 ">
+              <Link to="categories">Categories</Link>
             </li>
           </ul>
         )}
@@ -73,12 +87,6 @@ const SidBar = () => {
           <ul className="flex flex-col ml-6 ">
             <li className="p-1  hover:bg-blue-300 ">
               <Link to="customers">Customers</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="addCustomer">Add Customer</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editCustomer">Edit Customer</Link>
             </li>
           </ul>
         )}
@@ -103,9 +111,6 @@ const SidBar = () => {
             <li className="p-1 hover:bg-blue-300 ">
               <Link to="addVendor">Add Vendor</Link>
             </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editVendor">Edit Vendor</Link>
-            </li>
           </ul>
         )}
       </div>
@@ -125,12 +130,6 @@ const SidBar = () => {
           <ul className="flex flex-col ml-6 ">
             <li className="p-1  hover:bg-blue-300 ">
               <Link to="billing">Billings</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="addBilling">Add Billing</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editBilling">Edit Billing</Link>
             </li>
           </ul>
         )}
@@ -152,12 +151,6 @@ const SidBar = () => {
             <li className="p-1  hover:bg-blue-300 ">
               <Link to="orders">Orders</Link>
             </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="addOrder">Add Orders</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editOrder">Edit Orders</Link>
-            </li>
           </ul>
         )}
       </div>
@@ -178,44 +171,12 @@ const SidBar = () => {
             <li className="p-1  hover:bg-blue-300 ">
               <Link to="report">Reports</Link>
             </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="addReport">Add Report</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editReport">Edit Report</Link>
-            </li>
-          </ul>
-        )}
-      </div>
-      <div className="Category">
-        <div
-          className="flex items-center p-2 justify-between hover:bg-blue-300 "
-          onClick={() => setToggleCategory(!toggleCategory)}
-        >
-          <div className="flex items-center justify-between  gap-3">
-            <PiCertificateLight /> <h3>Category</h3>
-          </div>
-          <div className="arrow ml-10">
-            {toggleCategory ? <FaAngleDown /> : <FaAngleLeft />}
-          </div>
-        </div>
-        {toggleCategory && (
-          <ul className="flex flex-col ml-6 ">
-            <li className="p-1  hover:bg-blue-300 ">
-              <Link to="categories">Categories</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="addCategory">Add Category</Link>
-            </li>
-            <li className="p-1 hover:bg-blue-300 ">
-              <Link to="editCategory">Edit Category</Link>
-            </li>
           </ul>
         )}
       </div>
       <div className="settings">
         <div className="flex items-center p-2 justify-between hover:bg-blue-300 ">
-          <Link to='settings'>
+          <Link to="settings">
             <div className="flex items-center justify-between  gap-3">
               <FiSettings /> <h3>settings</h3>
             </div>

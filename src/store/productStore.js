@@ -1,7 +1,6 @@
 import axios from "axios";
 import { create } from "zustand";
 //const apiUrl = "http://localhost:8000";
-
 const useProductStore = create((set) => ({
   product: null,
   isloading: false,
